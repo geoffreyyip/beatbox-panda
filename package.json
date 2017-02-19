@@ -1,0 +1,30 @@
+{
+  "name": "beatbox-panda",
+  "version": "1.0.0",
+  "description": "To-do list with offline usage and mobile devices in mind",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack "
+  },
+  "repository": {
+    "type": "git",
+    "url": "\"TO DO\""
+  },
+  "author": "Geoffrey Yip",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.0",
+    "babel-preset-env": "^1.1.8",
+    "babel-preset-react": "^6.23.0",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-promise": "^3.4.1",
+    "eslint-plugin-react": "^6.9.0",
+    "stylelint": "^7.8.0",
+    "webpack": "^2.2.1"
+  }
+}
