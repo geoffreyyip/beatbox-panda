@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 /**
  * __dirname is current file directory,
@@ -27,9 +28,43 @@ var config = {
   },
   module: {
     rules: [
-      { test: /\.(js|jsx)$/, use: 'babel-loader' },
+      {
+        test: /\.(js|jsx)$/,
+        include: DEV,
+        use: [
+          { loader: 'babel-loader' },
+          { loader: 'eslint-loader' },
+        ],
+      },
+      {
+        test: /\.(scss|css)$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          // load postcss for autoprefixer
+          { loader: 'postcss-loader'},
+          { loader: 'sass-loader' },
+        ],
+      },
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true
+      },
+    }),
+  ],
 };
 
 module.exports = config;
