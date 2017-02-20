@@ -13,7 +13,7 @@
   },
   "author": "Geoffrey Yip",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.0",
     "babel-preset-env": "^1.1.8",
@@ -29,6 +29,5 @@
     "sass-loader": "^6.0.1",
     "stylelint": "^7.8.0",
     "webpack": "^2.2.1"
-  },
-  "dependencies": {}
+  }
 }
