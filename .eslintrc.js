@@ -6,7 +6,7 @@ module.exports = {
     "import",
     "promise",
   ],
-  "rules": [
+  "rules": {
     "complexity": ["error", 5],
     "no-unused-vars": ["error", { "vars": "all" }],
     // recommended config from eslint-plugin-promise readme
@@ -19,5 +19,5 @@ module.exports = {
     "promise/no-promise-in-callback": "warn",
     "promise/no-callback-in-promise": "warn",
     "promise/avoid-new": "warn",
-  ],
+  },
 };
