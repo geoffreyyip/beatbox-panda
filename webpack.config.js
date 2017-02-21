@@ -11,6 +11,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
  */
 var DEV = path.resolve(__dirname, 'src');
 var OUTPUT = path.resolve(__dirname, 'output');
+var BOOTSTRAP = path.resolve(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets');
 
 /**
  * entry and output are required properties
@@ -28,6 +29,26 @@ var config = {
   },
   module: {
     rules: [
+      /**
+       * load any assets without an assigned loader through url-loader
+       * url-loader will fallback onto file-loader if files exceed a
+       * given byte size, defined in query.limit
+       */
+      {
+        exclude: [
+          /\.html$/,
+          /\.(js|jsx)$/,
+          /\.(css|scss)$/,
+          /\.json$/,
+        ],
+        use: {
+          loader: 'url-loader',
+          query: {
+            limit: 10000,
+            name: 'static/media/[name].[hash:8].[ext]'
+          },
+        },
+      },
       {
         test: /\.(js|jsx)$/,
         include: DEV,
@@ -43,7 +64,13 @@ var config = {
           { loader: 'css-loader' },
           // load postcss for autoprefixer
           { loader: 'postcss-loader'},
-          { loader: 'sass-loader' },
+          // specify includePaths for @import to search with
+          {
+            loader: 'sass-loader',
+            options: {
+              includePaths: BOOTSTRAP,
+            }
+          },
         ],
       },
     ]

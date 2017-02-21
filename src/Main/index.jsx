@@ -1,4 +1,4 @@
 import Main from './Main';
-import './Main.css';
+import './Main.scss';
 
 export default Main;
