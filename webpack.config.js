@@ -114,6 +114,10 @@ var config = {
      * including .jsx may not be necessary. React already converts .jsx tempaltes to
      * Javascript code. If errors come up, it may be better to rename all .jsx files
      * to .js, and let Webpack uses its default resolve.extensions.
+     *
+     * why are we still using .jsx extensions then? Airbnb's style guide says to
+     * avoid using JSX syntax unless the file has .jsx extension. No problems have
+     * come up yet, because we include .jsx in default resolutions.
      */
     extensions: ['.js', '.json', '.jsx', '.css'],
   },
