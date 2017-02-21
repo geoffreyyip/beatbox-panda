@@ -1,9 +1,8 @@
-$jumbrotron-header-color: yellow !global;
+$jumbotron-heading-color: red;
 
-$jumbotron-font-size: 50px;
+$jumbotron-font-size: 30px;
 
-@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss";
-@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
-// @import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_jumbotron.scss";
+@import "bootstrap/_variables.scss";
+@import "bootstrap/mixins";
 @import "bootstrap/_jumbotron.scss";
 @import "bootstrap/_buttons.scss";
