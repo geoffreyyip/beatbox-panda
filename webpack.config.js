@@ -1,7 +1,9 @@
-const webpack = require('webpack');
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const StylelintWebpackPlugin = require('stylelint-webpack-plugin');
+// node modules
+var path = require('path');
+
+// npm libraries
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var StylelintWebpackPlugin = require('stylelint-webpack-plugin');
 
 /**
  * __dirname is current file directory,
@@ -10,9 +12,13 @@ const StylelintWebpackPlugin = require('stylelint-webpack-plugin');
  *
  * note that [current file dir] != [current working dir]
  */
-var DEV = path.resolve(__dirname, 'src');
-var OUTPUT = path.resolve(__dirname, 'output');
-var BOOTSTRAP = path.resolve(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets');
+var paths = {
+  appBuild: path.resolve(__dirname, 'output'),
+  appIndexJs: path.resolve(__dirname, 'src/index'),
+  appPublicHtml: path.resolve(__dirname, 'public/index.html'),
+  appSrc: path.resolve(__dirname, 'src'),
+  bootstrapSass: path.resolve(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets'),
+};
 
 /**
  * entry and output are required properties
@@ -23,9 +29,9 @@ var BOOTSTRAP = path.resolve(__dirname, 'node_modules/bootstrap-sass/assets/styl
  * plugins act on "chunks" of files
  */
 var config = {
-  entry: DEV + "/index.jsx",
+  entry: paths.appIndexJs,
   output: {
-    path: OUTPUT,
+    path: paths.appBuild,
     filename: "myCode.js"
   },
   module: {
@@ -50,9 +56,10 @@ var config = {
           },
         },
       },
+      // lints then transpiles all .js files in src/
       {
         test: /\.(js|jsx)$/,
-        include: DEV,
+        include: paths.appSrc,
         use: [
           { loader: 'babel-loader' },
           { loader: 'eslint-loader' },
@@ -65,11 +72,15 @@ var config = {
           { loader: 'css-loader' },
           // load postcss for autoprefixer
           { loader: 'postcss-loader'},
-          // specify includePaths for @import to search with
+          /**
+           * specify includePaths for .scss @import
+           * @import will search thru these paths before
+           * it searches relative paths
+           */
           {
             loader: 'sass-loader',
             options: {
-              includePaths: BOOTSTRAP,
+              includePaths: paths.bootstrapSass,
             }
           },
         ],
@@ -78,9 +89,8 @@ var config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      inject: true,
-      // TODO: encapsulate in a path constant
-      template: './public/index.html',
+      inject: 'body',
+      template: paths.appPublicHtml,
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -94,21 +104,18 @@ var config = {
         minifyURLs: true
       },
     }),
+    // CSS linter
     new StylelintWebpackPlugin({
       syntax: 'scss',
     }),
   ],
   resolve: {
-    // These are the reasonable defaults supported by the Node ecosystem.
-    // We also include JSX as a common component filename extension to support
-    // some tools, although we do not recommend using it, see:
-    // https://github.com/facebookincubator/create-react-app/issues/290
+    /**
+     * including .jsx may not be necessary. React already converts .jsx tempaltes to
+     * Javascript code. If errors come up, it may be better to rename all .jsx files
+     * to .js, and let Webpack uses its default resolve.extensions.
+     */
     extensions: ['.js', '.json', '.jsx', '.css'],
-    alias: {
-      // Support React Native Web
-      // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
-      'react-native': 'react-native-web'
-    },
   },
 };
 
