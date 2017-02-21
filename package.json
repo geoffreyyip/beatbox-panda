@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "\"TO DO\""
+    "url": "git://github.com/geoffreyyip/beatbox-panda.git"
   },
   "author": "Geoffrey Yip",
   "license": "ISC",
