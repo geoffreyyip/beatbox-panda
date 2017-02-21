@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const StylelintWebpackPlugin = require('stylelint-webpack-plugin');
 
 /**
  * __dirname is current file directory,
@@ -92,6 +93,9 @@ var config = {
         minifyCSS: true,
         minifyURLs: true
       },
+    }),
+    new StylelintWebpackPlugin({
+      syntax: 'scss',
     }),
   ],
   resolve: {
