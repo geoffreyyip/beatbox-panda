@@ -5,9 +5,12 @@ node_modules/
 output/
 
 # notes
+ADVICE.todo
 TODO
 
 # misc
 .DS_Store
 .env
+my-website.sublime-project
+my-website.sublime-workspace
 npm-debug.log
