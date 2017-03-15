@@ -80,7 +80,7 @@ var config = {
           {
             loader: 'sass-loader',
             options: {
-              includePaths: paths.bootstrapSass,
+              includePaths: [paths.bootstrapSass],
             }
           },
         ],
